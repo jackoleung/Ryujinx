@@ -22,6 +22,7 @@ namespace Ryujinx.Graphics.GAL
         public readonly bool SupportsR4G4Format;
         public readonly bool SupportsR4G4B4A4Format;
         public readonly bool SupportsSnormBufferTextureFormat;
+        public readonly bool SupportsSparseBuffer;
         public readonly bool Supports5BitComponentFormat;
         public readonly bool SupportsBlendEquationAdvanced;
         public readonly bool SupportsFragmentShaderInterlock;
@@ -73,6 +74,7 @@ namespace Ryujinx.Graphics.GAL
             bool supportsR4G4B4A4Format,
             bool supportsSnormBufferTextureFormat,
             bool supports5BitComponentFormat,
+            bool supportsSparseBuffer,
             bool supportsBlendEquationAdvanced,
             bool supportsFragmentShaderInterlock,
             bool supportsFragmentShaderOrderingIntel,
@@ -119,6 +121,7 @@ namespace Ryujinx.Graphics.GAL
             SupportsR4G4B4A4Format = supportsR4G4B4A4Format;
             SupportsSnormBufferTextureFormat = supportsSnormBufferTextureFormat;
             Supports5BitComponentFormat = supports5BitComponentFormat;
+            SupportsSparseBuffer = supportsSparseBuffer;
             SupportsBlendEquationAdvanced = supportsBlendEquationAdvanced;
             SupportsFragmentShaderInterlock = supportsFragmentShaderInterlock;
             SupportsFragmentShaderOrderingIntel = supportsFragmentShaderOrderingIntel;

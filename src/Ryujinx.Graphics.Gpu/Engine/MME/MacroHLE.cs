@@ -2,6 +2,7 @@ using Ryujinx.Common.Logging;
 using Ryujinx.Graphics.Device;
 using Ryujinx.Graphics.GAL;
 using Ryujinx.Graphics.Gpu.Engine.GPFifo;
+using Ryujinx.Memory.Range;
 using System;
 using System.Collections.Generic;
 
@@ -186,8 +187,8 @@ namespace Ryujinx.Graphics.Gpu.Engine.MME
 
                 _processor.ThreedClass.DrawIndirect(
                     topology,
-                    indirectBufferAddress,
-                    0,
+                    new MultiRange(indirectBufferAddress, IndirectIndexedDataEntrySize),
+                    default,
                     1,
                     IndirectIndexedDataEntrySize,
                     indexCount,
@@ -288,13 +289,13 @@ namespace Ryujinx.Graphics.Gpu.Engine.MME
 
             ulong indirectBufferSize = (ulong)maxDrawCount * (ulong)stride;
 
-            ulong indirectBufferAddress = bufferCache.TranslateAndCreateBuffer(_processor.MemoryManager, indirectBufferGpuVa, indirectBufferSize);
-            ulong parameterBufferAddress = bufferCache.TranslateAndCreateBuffer(_processor.MemoryManager, parameterBufferGpuVa, 4);
+            MultiRange indirectBufferRange = bufferCache.TranslateAndCreateBuffers(_processor.MemoryManager, indirectBufferGpuVa, indirectBufferSize);
+            MultiRange parameterBufferRange = bufferCache.TranslateAndCreateBuffers(_processor.MemoryManager, parameterBufferGpuVa, 4);
 
             _processor.ThreedClass.DrawIndirect(
                 topology,
-                indirectBufferAddress,
-                parameterBufferAddress,
+                indirectBufferRange,
+                parameterBufferRange,
                 maxDrawCount,
                 stride,
                 indexCount,
